@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
+import {Counter} from "./components/Counter";
 
 function App() {
-  let [likes, setLikes] = useState(0)
+    let [value, setValue] = useState('Input text')
 
-  const incrementHandler = () => {
-    setLikes(prevState=> prevState + 1)
-  }
-  const decrementHandler = () => {
-    setLikes(prevState=> prevState - 1)
+    const inputOnchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value)
+    }
+    return (
+        <div className="App">
 
-  }
-  return (
-    <div className="App">
-  <h1>{likes}</h1>
-      <button onClick={incrementHandler}>increment</button>
-      <button onClick={decrementHandler}>decrement</button>
-    </div>
-  );
+            <h2>{value}</h2>
+            <input type="text" value={value} onChange={inputOnchangeHandler}/>
+            <Counter/>
+        </div>
+    );
 }
 
 export default App;
