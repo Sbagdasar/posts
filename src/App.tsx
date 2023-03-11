@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Counter} from "./components/Counter";
+import {ClassCounter} from "./components/ClassCounter";
 
 function App() {
     let [value, setValue] = useState('Input text')
@@ -13,6 +14,7 @@ function App() {
             <h2>{value}</h2>
             <input type="text" value={value} onChange={inputOnchangeHandler}/>
             <Counter/>
+            <ClassCounter/>
         </div>
     );
 }
