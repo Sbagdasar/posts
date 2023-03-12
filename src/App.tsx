@@ -17,9 +17,13 @@ export function App() {
         {id: v1(), title: 'MSSQL', description: 'learn MSSQL'},
     ])
 
+    const addNewPost = (title:string, description:string) => {
+        setPosts([{id:v1(), title, description},...posts])
+    }
+
     return (
         <div className="App">
-            <CreateNewPostForm/>
+            <CreateNewPostForm addNewPost={addNewPost}/>
             <PostsList posts={posts} title={'Programming'}/>
         </div>
     );
