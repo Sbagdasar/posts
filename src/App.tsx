@@ -3,6 +3,7 @@ import {PostItem} from './components/PostItem';
 import './styles/App.css'
 import {v1} from "uuid";
 import Title from "antd/lib/typography/Title";
+import {PostsList} from "./components/PostsList";
 
 export type PostType = {
     id: string,
@@ -19,14 +20,7 @@ function App() {
 
     return (
         <div className="App">
-            <Title style={{textAlign:'center'}}>Posts list</Title>
-            {
-                posts.map(post => {
-                    return (
-                        <PostItem key={post.id} post={post}/>
-                    )
-                })
-            }
+            <PostsList posts={posts}/>
         </div>
     );
 }
