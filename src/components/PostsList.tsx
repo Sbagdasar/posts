@@ -6,6 +6,8 @@ import {PostType} from "../App";
 type PostsListPropsType = {
     posts:PostType[]
     title:string
+    removePost:(id:string)=>void
+
 }
 export const PostsList = ({posts, ...props}:PostsListPropsType) => {
     return (
@@ -14,7 +16,7 @@ export const PostsList = ({posts, ...props}:PostsListPropsType) => {
             {
                 posts.map(post => {
                     return (
-                        <PostItem key={post.id} post={post}/>
+                        <PostItem key={post.id} post={post} removePost={props.removePost}/>
                     )
                 })
             }

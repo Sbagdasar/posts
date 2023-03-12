@@ -5,25 +5,23 @@ import {CustomButton} from "../../components/UI/button/CustomButton";
 import s from './CreateNewPostForm.module.css'
 
 type CreateNewPostFormPropsType = {
-    addNewPost: (title: string, description: string) => void
+    addNewPost: (post:{title:string, description:string}) => void
 }
 export const CreateNewPostForm = ({addNewPost}: CreateNewPostFormPropsType) => {
 
-    const [postTitle, setPostTitle] = useState('')
-    const [postDescription, setPostDescription] = useState('')
+    const [post, setPost] = useState({ title:'', description:''})
     const addPostClickHandler = () => {
-        addNewPost(postTitle, postDescription)
-        setPostTitle('')
-
-        setPostDescription('')
-
+        addNewPost(post)
+        setPost({ title:'', description:''})
     }
     const titleChangeHandler = (title: string) => {
-        setPostTitle(title)
+        setPost({...post, title})
     }
-    const descriptionChangeHandler = (title: string) => {
-        setPostDescription(title)
+    const descriptionChangeHandler = (description: string) => {
+        setPost({...post, description})
+
     }
+
 
     return (
         <Form
@@ -32,8 +30,8 @@ export const CreateNewPostForm = ({addNewPost}: CreateNewPostFormPropsType) => {
             labelCol={{span: 8}}
             wrapperCol={{span: 16}}
         >
-            <CustomInput placeholder={'Post name'} value={postTitle} onChange={titleChangeHandler}/>
-            <CustomInput placeholder={'Post description'} value={postDescription} onChange={descriptionChangeHandler}/>
+            <CustomInput placeholder={'Post name'} value={post.title} onChange={titleChangeHandler}/>
+            <CustomInput placeholder={'Post description'} value={post.description} onChange={descriptionChangeHandler}/>
             <CustomButton onClick={addPostClickHandler}>Add post</CustomButton>
         </Form>
     );

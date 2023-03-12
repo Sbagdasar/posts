@@ -1,11 +1,15 @@
 import React from 'react';
 import {PostType} from "../App";
-import {Button} from "antd";
+import {CustomButton} from "./UI/button/CustomButton";
 
 export type PostItemPropsType = {
    post: PostType
+    removePost:(id:string)=>void
 }
-export const PostItem = ({post}: PostItemPropsType) => {
+export const PostItem = ({post, ...props}: PostItemPropsType) => {
+    const removePostHandler = () => {
+        props.removePost(post.id)
+    }
     return (
         <div className="post">
             <div className="post_content">
@@ -14,7 +18,7 @@ export const PostItem = ({post}: PostItemPropsType) => {
                 </div>
             </div>
             <div className="post_button">
-                <Button type={'primary'}>Delete</Button>
+                <CustomButton onClick={removePostHandler}>Delete</CustomButton>
             </div>
         </div>
     );

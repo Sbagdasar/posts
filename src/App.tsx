@@ -17,14 +17,16 @@ export function App() {
         {id: v1(), title: 'MSSQL', description: 'learn MSSQL'},
     ])
 
-    const addNewPost = (title:string, description:string) => {
-        setPosts([{id:v1(), title, description},...posts])
+    const addNewPost = (post: { title: string, description: string }) => {
+        setPosts([{id: v1(), ...post}, ...posts])
     }
-
+    const removePost = (id: string) => {
+        setPosts(posts.filter(post => post.id !== id))
+    }
     return (
         <div className="App">
             <CreateNewPostForm addNewPost={addNewPost}/>
-            <PostsList posts={posts} title={'Programming'}/>
+            <PostsList posts={posts} title={'Programming'} removePost={removePost}/>
         </div>
     );
 }
