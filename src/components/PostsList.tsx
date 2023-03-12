@@ -4,15 +4,19 @@ import {PostItem} from "./PostItem";
 import {PostType} from "../App";
 
 type PostsListPropsType = {
-    posts:PostType[]
-    title:string
-    removePost:(id:string)=>void
+    posts: PostType[]
+    title: string
+    removePost: (id: string) => void
 
 }
-export const PostsList = ({posts, ...props}:PostsListPropsType) => {
+export const PostsList = ({posts, ...props}: PostsListPropsType) => {
     return (
         <div>
-            <Title style={{textAlign:'center'}}>{props.title}</Title>
+
+            {
+                posts.length ? <Title style={{textAlign: 'center'}}>{props.title}</Title>
+                    : <Title level={2} style={{textAlign: 'center'}}>No posts</Title>
+            }
             {
                 posts.map(post => {
                     return (
