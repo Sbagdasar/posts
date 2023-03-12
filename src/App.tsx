@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import {PostItem} from './components/PostItem';
 import './styles/App.css'
 import {v1} from "uuid";
-import Title from "antd/lib/typography/Title";
 import {PostsList} from "./components/PostsList";
 
 export type PostType = {
@@ -20,7 +18,7 @@ function App() {
 
     return (
         <div className="App">
-            <PostsList posts={posts}/>
+            <PostsList posts={posts} title={'Programming'}/>
         </div>
     );
 }

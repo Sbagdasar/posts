@@ -5,11 +5,12 @@ import {PostType} from "../App";
 
 type PostsListPropsType = {
     posts:PostType[]
+    title:string
 }
-export const PostsList = ({posts}:PostsListPropsType) => {
+export const PostsList = ({posts, ...props}:PostsListPropsType) => {
     return (
         <div>
-            <Title style={{textAlign:'center'}}>Posts list</Title>
+            <Title style={{textAlign:'center'}}>{props.title}</Title>
             {
                 posts.map(post => {
                     return (
