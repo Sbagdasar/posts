@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './styles/App.css'
 import {v1} from "uuid";
 import {PostsList} from "./components/PostsList";
+import {CreateNewPostForm} from "./features/createNewPost/CreateNewPostForm";
 
 export type PostType = {
     id: string,
@@ -18,6 +19,7 @@ function App() {
 
     return (
         <div className="App">
+            <CreateNewPostForm/>
             <PostsList posts={posts} title={'Programming'}/>
         </div>
     );
