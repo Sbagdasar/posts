@@ -1,10 +1,14 @@
 import React from 'react';
-import s from "/CustomButton.module.css"
-export const CustomButton = () => {
+import s from './CustomButton.module.css'
+import Button from "antd/lib/button";
+type CustomButtonPropsType = {
+    children: React.ReactNode
+}
+export const CustomButton = ({children, ...props}:CustomButtonPropsType) => {
     return (
-        <button className={s.cBtn}>
-
-        </button>
+        <Button {...props} className={s.cBtn}>
+            {children}
+        </Button>
     );
 };
 
