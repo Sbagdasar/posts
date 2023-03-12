@@ -10,7 +10,7 @@ export type PostType = {
     description: string
 }
 
-function App() {
+export function App() {
     const [posts, setPosts] = useState<PostType[]>([
         {id: v1(), title: 'JavaScript', description: 'learn JS'},
         {id: v1(), title: 'Java', description: 'learn Java'},
@@ -25,4 +25,3 @@ function App() {
     );
 }
 
-export default App;
