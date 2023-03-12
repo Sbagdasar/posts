@@ -1,19 +1,21 @@
 import React from 'react';
+import {PostType} from "../App";
+import {Button} from "antd";
 
-export const PostItem = () => {
+export type PostItemPropsType = {
+   post: PostType
+}
+export const PostItem = ({post}: PostItemPropsType) => {
     return (
         <div className="post">
             <div className="post_content">
-                <strong>Lorem ipsum.</strong>
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque est exercitationem placeat
-                    porro
-                    veritatis.
+                <strong>{post.title}</strong>
+                <div>{post.description}
                 </div>
             </div>
             <div className="post_button">
-                <button>Delete</button>
+                <Button type={'primary'}>Delete</Button>
             </div>
-
         </div>
     );
 };
