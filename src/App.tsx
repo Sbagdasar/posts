@@ -16,6 +16,7 @@ export function App() {
         {id: v1(), title: 'JavaScript', description: 'learn JS'},
         {id: v1(), title: 'Java', description: 'learn Java'},
         {id: v1(), title: 'MSSQL', description: 'learn MSSQL'},
+        {id: v1(), title: 'pyton', description: ' pyton'},
     ])
     const [selectedSort, setSelectedSort] = useState('Sort by')
     const addNewPost = (post: { title: string, description: string }) => {
