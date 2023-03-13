@@ -14,8 +14,9 @@ type OptionsType = {
 }
 export const CustomSelect = (props:CustomSelectPropsType) => {
     const handleChange = (value:string) => {
-        if(value ==='title'|| value==='description')
-        props.onChange(value)
+        if(value ==='title'|| value==='description'){
+            props.onChange(value)
+        }
     }
     return (
         <>
