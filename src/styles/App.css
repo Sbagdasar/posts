@@ -19,3 +19,17 @@
     justify-content: space-between;
     align-items: center;
 }
+.postItem-enter {
+    opacity: 0;
+}
+.postItem-enter-active {
+    opacity: 1;
+    transition: all 500ms ease-in;
+}
+.postItem-exit {
+    opacity: 1;
+}
+.postItem-exit-active {
+    opacity: 0;
+    transition: all 500ms ease-in;
+}
