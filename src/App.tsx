@@ -7,24 +7,24 @@ import {CustomModal} from "./components/UI/customModal/CustomModal";
 import {usePosts} from "./hooks/usePosts";
 import {postsAPI, PostType} from "./dll/postsAPI";
 import Spin from "antd/lib/spin";
+import {useFetching} from "./hooks/useFetching";
 
 export type SortType = 'title' | 'body'
 
 export function App() {
     const [posts, setPosts] = useState<PostType[]>([])
-    const [isLoading, setIsLoading] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [filter, setFilter] = useState({sortBy: '', search: ''})
 
     const sortedAndFilteredPosts = usePosts(posts, filter.sortBy as SortType, filter.search)
 
+    const [isLoading, error, isFetching]= useFetching(async () =>{
+       const posts = await postsAPI.getPosts()
+                setPosts(posts)
+    })
+
     useEffect(() => {
-        setIsLoading(true)
-        postsAPI.getPosts()
-            .then((res) => {
-                setPosts(res.data)
-                setIsLoading(false)
-            })
+        isFetching()
     }, [])
 
     const addNewPost = (post: { title: string, body: string }) => {
@@ -46,6 +46,7 @@ export function App() {
             <CustomModal title={'Add new post'} isShow={showModal} showModalHandler={showModalHandler}>
                 <CreateNewPostForm addNewPost={addNewPost}/>
             </CustomModal>
+            {error && <h2>{error}</h2>}
             {
                 isLoading ? <Spin tip="Loading..." size="large" style={{
                         display: 'flex',

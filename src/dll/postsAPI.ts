@@ -8,7 +8,7 @@ const instance = axios.create({
 
 export const postsAPI = {
     getPosts (){
-        return instance.get<PostType[]>('/posts')
+        return instance.get<PostType[]>('/posts').then(res=> res.data)
     }
 }
 
