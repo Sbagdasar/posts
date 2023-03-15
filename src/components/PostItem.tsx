@@ -13,6 +13,7 @@ export const PostItem = ({post, ...props}: PostItemPropsType) => {
     return (
         <div className="post">
             <div className="post_content">
+                <span>{post.id }. </span>
                 <strong>{post.title}</strong>
                 <div>{post.body}
                 </div>

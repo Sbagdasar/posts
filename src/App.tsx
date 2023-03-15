@@ -8,6 +8,8 @@ import {usePosts} from "./hooks/usePosts";
 import {postsAPI, PostType} from "./dll/postsAPI";
 import Spin from "antd/lib/spin";
 import {useFetching} from "./hooks/useFetching";
+import {getPagesCount} from "./utils/getPagesCount";
+import Pagination from "antd/lib/pagination";
 
 export type SortType = 'title' | 'body'
 
@@ -16,16 +18,22 @@ export function App() {
     const [showModal, setShowModal] = useState(false)
     const [filter, setFilter] = useState({sortBy: '', search: ''})
 
+    const [totalCount, setTotalCount] = useState(0)
+    const [page, setPage] = useState(1)
+    const [limit, setLimit] = useState(10)
+
     const sortedAndFilteredPosts = usePosts(posts, filter.sortBy as SortType, filter.search)
 
-    const [isLoading, error, isFetching]= useFetching(async () =>{
-       const posts = await postsAPI.getPosts()
-                setPosts(posts)
+    const [isLoading, error, isFetching] = useFetching(async () => {
+        const response = await postsAPI.getPosts(limit, page)
+        setPosts(response.data)
+        // let pageCount = getPagesCount(response.headers['x-total-count'], limit)
+        setTotalCount(response.headers['x-total-count'])
     })
 
     useEffect(() => {
         isFetching()
-    }, [])
+    }, [page, limit])
 
     const addNewPost = (post: { title: string, body: string }) => {
         let id = Number(new Date())
@@ -53,13 +61,27 @@ export function App() {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        gap:'10px'
+                        gap: '10px'
                     }}/>
                     : <PostsList posts={sortedAndFilteredPosts}
                                  title={'Programming'}
                                  removePost={removePost}/>
             }
 
+            <Pagination defaultCurrent={1}
+                        current={page}
+                        total={totalCount}
+                        showSizeChanger
+                        hideOnSinglePage
+                        onChange={(page, pageSize)=> {
+                            setLimit(pageSize)
+                                setPage(page)
+                        }
+                        }
+                        onShowSizeChange={(current, size) => {
+                            setLimit(size)
+                            setPage(1)
+                        }}/>
         </div>
     );
 }

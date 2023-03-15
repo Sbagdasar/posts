@@ -7,8 +7,13 @@ const instance = axios.create({
 
 
 export const postsAPI = {
-    getPosts (){
-        return instance.get<PostType[]>('/posts').then(res=> res.data)
+    getPosts (_limit:number = 10, _page:number = 1){
+        return instance.get<PostType[]>('/posts', {
+            params: {
+                _limit,
+                _page
+            }
+        })
     }
 }
 
