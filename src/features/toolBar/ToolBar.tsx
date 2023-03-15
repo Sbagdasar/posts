@@ -1,7 +1,7 @@
 import React from 'react';
 import {CustomInput} from "../../components/UI/input/CustomInput";
 import {CustomSelect} from "../../components/UI/select/CustomSelect";
-
+import s from './ToolBar.module.css'
 type ToolBarPT = {
     filter: FilterType
     setFilter : (filter : FilterType)=>void
@@ -18,7 +18,7 @@ export const ToolBar = ({filter, setFilter}: ToolBarPT) => {
         setFilter({...filter, search:value})
     }
     return (
-        <div>
+        <div className={s.toolbarContainer}>
             <CustomInput placeholder={'Search'} value={filter.search} onChange={setSearchValue}/>
             <CustomSelect defaultValue={'Sort by'}
                           options={[
