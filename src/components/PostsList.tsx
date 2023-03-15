@@ -1,17 +1,17 @@
 import React from 'react';
 import Title from "antd/lib/typography/Title";
 import {PostItem} from "./PostItem";
-import {PostType} from "../App";
 import {
     CSSTransition,
     TransitionGroup,
 } from 'react-transition-group';
 import s from './PostsList.module.css'
+import {PostType} from "../dll/postsAPI";
 
 type PostsListPropsType = {
     posts: PostType[]
     title: string
-    removePost: (id: string) => void
+    removePost: (id: number) => void
 }
 export const PostsList = ({posts, ...props}: PostsListPropsType) => {
     return (

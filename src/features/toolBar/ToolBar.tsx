@@ -2,6 +2,7 @@ import React from 'react';
 import {CustomInput} from "../../components/UI/input/CustomInput";
 import {CustomSelect} from "../../components/UI/select/CustomSelect";
 import s from './ToolBar.module.css'
+import {SortType} from "../../App";
 type ToolBarPT = {
     filter: FilterType
     setFilter : (filter : FilterType)=>void
@@ -11,7 +12,7 @@ type FilterType = {
     search:string
 }
 export const ToolBar = ({filter, setFilter}: ToolBarPT) => {
-    const sortPosts = (sortBy: 'title' | 'description') => {
+    const sortPosts = (sortBy: 'title'|'body') => {
         setFilter({...filter, sortBy})
     }
     const setSearchValue = (value: string) => {
@@ -24,7 +25,7 @@ export const ToolBar = ({filter, setFilter}: ToolBarPT) => {
                           options={[
                               {value: 'Sort by', label: 'Sort by', disabled: true},
                               {value: 'title', label: 'title'},
-                              {value: 'description', label: 'description'},
+                              {value: 'body', label: 'body'},
                           ]}
                           value={filter.sortBy || 'Sort by'}
                           onChange={sortPosts}

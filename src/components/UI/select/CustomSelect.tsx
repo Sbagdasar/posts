@@ -5,7 +5,7 @@ type CustomSelectPropsType = {
     defaultValue:string
     options: OptionsType[]
     value:string
-    onChange:(sort:'title'|'description')=>void
+    onChange:(sort:'title'|'body')=>void
 }
 type OptionsType = {
     value:string
@@ -14,7 +14,7 @@ type OptionsType = {
 }
 export const CustomSelect = (props:CustomSelectPropsType) => {
     const handleChange = (value:string) => {
-        if(value ==='title'|| value==='description'){
+        if(value ==='title'|| value==='body'){
             props.onChange(value)
         }
     }

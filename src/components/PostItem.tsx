@@ -1,10 +1,10 @@
 import React from 'react';
-import {PostType} from "../App";
 import {CustomButton} from "./UI/button/CustomButton";
+import {PostType} from "../dll/postsAPI";
 
 export type PostItemPropsType = {
    post: PostType
-    removePost:(id:string)=>void
+    removePost:(id:number)=>void
 }
 export const PostItem = ({post, ...props}: PostItemPropsType) => {
     const removePostHandler = () => {
@@ -14,7 +14,7 @@ export const PostItem = ({post, ...props}: PostItemPropsType) => {
         <div className="post">
             <div className="post_content">
                 <strong>{post.title}</strong>
-                <div>{post.description}
+                <div>{post.body}
                 </div>
             </div>
             <div className="post_button">
