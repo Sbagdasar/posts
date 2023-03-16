@@ -8,7 +8,6 @@ import {usePosts} from "./hooks/usePosts";
 import {postsAPI, PostType} from "./dll/postsAPI";
 import Spin from "antd/lib/spin";
 import {useFetching} from "./hooks/useFetching";
-import {getPagesCount} from "./utils/getPagesCount";
 import Pagination from "antd/lib/pagination";
 
 export type SortType = 'title' | 'body'
@@ -47,7 +46,14 @@ export function App() {
     const showModalHandler = (isShow: boolean) => {
         setShowModal(isShow)
     }
-
+    const pageChangeHandler = (page:number, pageSize:number)=> {
+        setLimit(pageSize)
+        setPage(page)
+    }
+    const pageLimitHandler = (current:number, size:number) => {
+        setLimit(size)
+        setPage(1)
+    }
     return (
         <div className="App">
             <ToolBar filter={filter} setFilter={setFilter}/>
@@ -73,15 +79,8 @@ export function App() {
                         total={totalCount}
                         showSizeChanger
                         hideOnSinglePage
-                        onChange={(page, pageSize)=> {
-                            setLimit(pageSize)
-                                setPage(page)
-                        }
-                        }
-                        onShowSizeChange={(current, size) => {
-                            setLimit(size)
-                            setPage(1)
-                        }}/>
+                        onChange={pageChangeHandler}
+                        onShowSizeChange={pageLimitHandler}/>
         </div>
     );
 }
