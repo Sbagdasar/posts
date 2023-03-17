@@ -1,4 +1,5 @@
-.postsListContainer{
-    border: 1px solid #ccc;
-    padding: 15px;
+.postsListContainer {
+  padding: 15px;
+
+  border: 1px solid #ccc;
 }

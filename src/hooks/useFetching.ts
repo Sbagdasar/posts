@@ -1,23 +1,23 @@
-import {useState} from "react";
-import {handleError} from "../helpers/errorHandle";
+import { useState } from 'react'
 
-export const useFetching = (callback: (...args:any)=>void) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState('')
+import { handleError } from '../helpers/errorHandle'
 
-    const isFetching= async (...args:any):Promise<void>  =>{
-        try {
-            setIsLoading(true)
-           await callback(...args)
+export const useFetching = (callback: (...args: any) => void) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
-        } catch (e){
+  const isFetching = async (...args: any): Promise<void> => {
+    try {
+      setIsLoading(true)
+      await callback(...args)
+    } catch (e) {
+      const message = handleError(e as Error)
 
-            const message = handleError(e as Error)
-            setError(message)
-        }
-        finally {
-            setIsLoading(false)
-        }
+      setError(message)
+    } finally {
+      setIsLoading(false)
     }
-return [isLoading, error, isFetching] as const;
+  }
+
+  return [isLoading, error, isFetching] as const
 }

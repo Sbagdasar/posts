@@ -1,9 +1,10 @@
-.toolbarContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 20px 0;
-    max-width: 30%;
-    gap: 30px;
+.toolbarContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  max-width: 30%;
+  margin: 20px 0;
 }
