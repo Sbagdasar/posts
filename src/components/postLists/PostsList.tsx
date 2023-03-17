@@ -1,12 +1,12 @@
 import React from 'react';
 import Title from "antd/lib/typography/Title";
-import {PostItem} from "./PostItem";
+import {PostItem} from "../postItem/PostItem";
 import {
     CSSTransition,
     TransitionGroup,
 } from 'react-transition-group';
 import s from './PostsList.module.css'
-import {PostType} from "../dll/postsAPI";
+import {PostType} from "../../dll/postsAPI";
 
 type PostsListPropsType = {
     posts: PostType[]

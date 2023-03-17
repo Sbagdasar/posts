@@ -14,6 +14,12 @@ export const postsAPI = {
                 _page
             }
         })
+    },
+    getItemPost(id:number){
+        return instance.get<PostType>(`posts/${id}`)
+    },
+    getComments(id:number, comments:string){
+        return instance.get<CommentType[]>(`posts/${id}/${comments}`)
     }
 }
 
@@ -22,5 +28,12 @@ export type PostType = {
     "userId"?: number,
     "id": number,
     "title": string,
+    "body": string
+}
+export type CommentType ={
+    "postId": number,
+    "id": number,
+    "name": string
+    "email": string
     "body": string
 }

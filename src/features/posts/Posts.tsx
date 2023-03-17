@@ -9,7 +9,7 @@ import {useFetching} from "../../hooks/useFetching";
 import {CustomModal} from "../../components/UI/customModal/CustomModal";
 import {CreateNewPostForm} from "../createNewPost/CreateNewPostForm";
 import {ToolBar} from "../toolBar/ToolBar";
-import {PostsList} from "../../components/PostsList";
+import {PostsList} from "../../components/postLists/PostsList";
 
 export type SortType = 'title' | 'body'
 
