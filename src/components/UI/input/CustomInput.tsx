@@ -7,6 +7,7 @@ type CustomInputPropsType = {
   placeholder: string
   value: string
   onChange: (title: string) => void
+  type?: string
 }
 export const CustomInput = ({ placeholder, ...props }: CustomInputPropsType) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

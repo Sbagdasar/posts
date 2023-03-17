@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { postsAPI, PostType } from '../../dll/postsAPI'
+import { PATH } from '../../utils/path'
 import { CustomButton } from '../UI/button/CustomButton'
 
 import s from './PostItem.module.css'
@@ -18,7 +19,7 @@ export const PostItem = ({ post, ...props }: PostItemPropsType) => {
     props.removePost(post.id)
   }
   const openPostHandler = () => {
-    navigate(`/posts/${post.id}`)
+    navigate(`/${PATH.POSTS}/${post.id}/comments`)
   }
 
   return (

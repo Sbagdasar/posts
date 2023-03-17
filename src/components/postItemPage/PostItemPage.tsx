@@ -11,6 +11,8 @@ export const PostItemPage = () => {
   const [post, setPost] = useState<PostType>()
   const [comments, setComments] = useState<CommentType[]>()
   const params = useParams()
+
+  console.log(params)
   const [isLoading, error, isFetching] = useFetching((id: number) => {
     postsAPI.getItemPost(id).then(res => {
       setPost(res.data)
