@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../../styles/App.css'
 
 import Pagination from 'antd/lib/pagination'
@@ -8,6 +8,7 @@ import { PostsList } from '../../components/postLists/PostsList'
 import { CustomModal } from '../../components/UI/customModal/CustomModal'
 import { postsAPI, PostType } from '../../dll/postsAPI'
 import { useFetching } from '../../hooks/useFetching'
+import { useObserver } from '../../hooks/useObserver'
 import { usePosts } from '../../hooks/usePosts'
 import { CreateNewPostForm } from '../createNewPost/CreateNewPostForm'
 import { ToolBar } from '../toolBar/ToolBar'
@@ -19,17 +20,27 @@ export function Posts() {
   const [filter, setFilter] = useState({ sortBy: '', search: '' })
 
   const [totalCount, setTotalCount] = useState(0)
+
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
-
+  const lastPost = useRef<HTMLDivElement>(null)
   const sortedAndFilteredPosts = usePosts(posts, filter.sortBy as SortType, filter.search)
 
   const [isLoading, error, isFetching] = useFetching(async () => {
     const response = await postsAPI.getPosts(limit, page)
 
-    setPosts(response.data)
+    setPosts([...posts, ...response.data])
     setTotalCount(response.headers['x-total-count'])
   })
+
+  useObserver(
+    lastPost,
+    isLoading,
+    () => {
+      setPage(page + 1)
+    },
+    page < Math.ceil(totalCount / limit)
+  )
 
   useEffect(() => {
     isFetching()
@@ -63,7 +74,7 @@ export function Posts() {
         <CreateNewPostForm addNewPost={addNewPost} />
       </CustomModal>
       {error && <h2>{error}</h2>}
-      {isLoading ? (
+      {isLoading && (
         <Spin
           tip="Loading..."
           size="large"
@@ -75,10 +86,9 @@ export function Posts() {
             gap: '10px',
           }}
         />
-      ) : (
-        <PostsList posts={sortedAndFilteredPosts} title={'Programming'} removePost={removePost} />
       )}
-
+      {<PostsList posts={sortedAndFilteredPosts} title={'Programming'} removePost={removePost} />}
+      <div ref={lastPost}></div>
       <Pagination
         defaultCurrent={1}
         current={page}
