@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './styles/App.css'
 import {
@@ -38,12 +38,21 @@ const router = createBrowserRouter(
 
 export function App() {
   const [isAuth, setIsAuth] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)
+    }
+    setIsLoading(false)
+  }, [])
 
   return (
     <AuthContext.Provider
       value={{
         isAuth,
         setIsAuth,
+        isLoading,
       }}
     >
       <RouterProvider router={router} />

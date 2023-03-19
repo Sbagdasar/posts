@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Menu from 'antd/lib/menu'
 import { Link } from 'react-router-dom'
 
+import { AuthContext, AuthContextType } from '../../components/context/AuthContext'
+import { CustomButton } from '../../components/UI/button/CustomButton'
+
+import s from './Navbar.module.css'
+
 export const Navbar = () => {
+  const { isAuth, setIsAuth } = useContext<AuthContextType>(AuthContext)
+  const logOutHandler = () => {
+    setIsAuth(false)
+    localStorage.removeItem('auth')
+  }
+
   return (
-    <div>
+    <div className={s.navbarContainer}>
       <Menu
         onClick={() => {}}
         selectedKeys={['Posts']}
@@ -23,6 +34,8 @@ export const Navbar = () => {
           },
         ]}
       />
+      {/* eslint-disable-next-line react/no-children-prop */}
+      {isAuth ? <CustomButton onClick={logOutHandler} children={'Log out'} /> : null}
     </div>
   )
 }

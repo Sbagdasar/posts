@@ -24,6 +24,7 @@ export const Login = () => {
   const signInHandler = () => {
     if (login === 'admin' && password === '123') {
       setIsAuth(true)
+      localStorage.setItem('auth', 'true')
     }
   }
 
