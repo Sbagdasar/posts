@@ -21,6 +21,7 @@ export const CustomInput = ({ placeholder, ...props }: CustomInputPropsType) => 
       className={s.cInput}
       value={props.value}
       onChange={onChangeHandler}
+      autoComplete={'off'}
     />
   )
 }

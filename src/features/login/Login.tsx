@@ -1,24 +1,48 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
+import { Navigate } from 'react-router-dom'
+
+import { useRedirectLocation } from '../../components/appRouters/RequireAuthRoute'
+import { AuthContext, AuthContextType } from '../../components/context/AuthContext'
 import { CustomButton } from '../../components/UI/button/CustomButton'
 import { CustomInput } from '../../components/UI/input/CustomInput'
+import { PATH } from '../../utils/path'
 
+import s from './Login.module.css'
 export const Login = () => {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
+  let { isAuth, setIsAuth } = useContext<AuthContextType>(AuthContext)
+  const { state: locationState } = useRedirectLocation()
+  const loginHandler = (title: string) => {
+    setLogin(title)
+  }
+  const passwordHandler = (title: string) => {
+    setPassword(title)
+  }
+
+  const signInHandler = () => {
+    if (login === 'admin' && password === '123') {
+      setIsAuth(true)
+    }
+  }
+
+  if (isAuth) {
+    return <Navigate to={locationState?.path || `/${PATH.POSTS}`} replace />
+  }
 
   return (
-    <div>
+    <div className={s.loginContainer}>
       <form>
-        <CustomInput placeholder={'login'} value={login} onChange={() => {}} />
+        <CustomInput placeholder={'login -- write admin'} value={login} onChange={loginHandler} />
         <CustomInput
-          placeholder={'password'}
+          placeholder={'password -- write 123'}
           type={'password'}
           value={password}
-          onChange={() => {}}
+          onChange={passwordHandler}
         />
         {/* eslint-disable-next-line react/no-children-prop */}
-        <CustomButton onClick={() => {}} children={'Sign in'} />
+        <CustomButton onClick={signInHandler} children={'Sign in'} />
       </form>
     </div>
   )
