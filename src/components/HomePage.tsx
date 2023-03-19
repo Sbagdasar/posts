@@ -3,8 +3,6 @@ import React, { useContext } from 'react'
 import Spin from 'antd/lib/spin'
 import { Outlet } from 'react-router-dom'
 
-import { Navbar } from '../features/navBar/Navbar'
-
 import { AuthContext, AuthContextType } from './context/AuthContext'
 
 export const HomePage = () => {
